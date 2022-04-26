@@ -103,14 +103,14 @@ char getlow(struct alphabet * dict)
 
 void error()
 {
-	printf("Вы некорректно ввели номер режима! Попробуйте ещё раз.\n");
+	printf("You entered the mode number incorrectly! Try again.\n");
 }
 
 // Frequency analysis of the cryptogram
 void freq(struct alphabet * dict)
 {
 	system("cls");
-	printf("Частотный анализ криптограммы:\n\n");
+	printf("Frequency analysis of the cryptogram:\n\n");
 	double symbols[33] = { 0 };
 	char symbol;
 	int countchar = 0;
@@ -118,8 +118,8 @@ void freq(struct alphabet * dict)
 	if (file == NULL)
 	{
 		system("cls");
-		printf("Ошибка! Не был найден исходный файл с криптограммой. Ожидался: lab_var_2.txt\n");
-		printf("Проверьте наличие файла и запустите программу ещё раз.\n");
+		printf("Error! The source file with the cryptogram was not found. Expected: lab_var_2.txt\n");
+		printf("Check for the file and run the program again.\n");
 		exit(-1);
 	}
 	// Reading each letter from the cryptogram, counting the number of each letter and the number of all letters
@@ -171,10 +171,10 @@ void autochange(char* buf, struct story * name, struct alphabet * dict, int flag
 	system("cls");
 	if (flag == 0)
 	{
-		printf("Автоматическую замену букв можно выполнить только после частотного анализа криптограммы!\n");
+		printf("Automatic letter replacement can be performed only after frequency analysis of the cryptogram!\n");
 		return;
 	}
-	printf("Автоматическая замена букв \"Cryptanalysis\"\n\n");
+	printf("Automatic letter replacement \"Cryptanalysis\"\n\n");
 	for (int i = 0; i < 32; i++)
 	{
 		for (int j = 0; j < name->bufsize; j++)
@@ -233,7 +233,7 @@ void backlet(char* buf, struct story * name)
 	else
 	{
 		system("cls");
-		printf("Замен букв не происходило! Выберите другой пункт меню.\n");
+		printf("There were no letter replacements! Select another menu item.\n");
 		return;
 	}
 }
@@ -242,8 +242,8 @@ void backlet(char* buf, struct story * name)
 void history(struct story * name)
 {
 	system("cls");
-	printf("История замен букв \"Cryptanalysis\"\n\n");
-	if (name->changes[1] == 0) printf("Замен букв не происходило.\n");
+	printf("History of letter replacements \"Cryptanalysis\"\n\n");
+	if (name->changes[1] == 0) printf("There were no letter replacements.\n");
 	for (int i = 0; i < name->counts; i++)
 	{
 		printf("%c -> %c\n", name->changes[i], name->changes[i + 1]);
@@ -258,29 +258,29 @@ void deshifr(char* buf, struct story * name, struct alphabet * dict, int token)
 	char letter1, letter2;
 	if (token == 1)
 	{
-		printf("Какую букву вы хотите расшифровать? (Введите букву):\n");
+		printf("What letter do you want to decipher? (Enter a letter):\n");
 		letter1 = getlow(dict);
 		while (letter1 == 0)
 		{
-			printf("Вы неккоректно ввели букву. Попробуйте ещё раз:\n");
+			printf("You entered the letter incorrectly. Try again:\n");
 			letter1 = getlow(dict);
 		}
 	}
 	else
 	{
-		printf("Какую букву вы хотите расшифровать? (Введите прописную букву):\n");
+		printf("What letter do you want to decipher? (Enter a capital letter):\n");
 		letter1 = gethigh(dict);
 		while (letter1 == 0)
 		{
-			printf("Вы неккоректно ввели букву. Попробуйте ещё раз:\n");
+			printf("You entered the letter incorrectly. Try again:\n");
 			letter1 = gethigh(dict);
 		}
 	}
-	printf("На какую? (Введите строчную букву):\n");
+	printf("Which one? (Enter a lowercase letter):\n");
 	letter2 = getlow(dict);
 	while (letter2 == 0)
 	{
-		printf("Вы неккоректно ввели букву. Попробуйте ещё раз:\n");
+		printf("You entered the letter incorrectly. Try again:\n");
 		letter2 = getlow(dict);
 	}
 	for (int i = 0; i < name->bufsize; i++)
@@ -306,7 +306,7 @@ void record(char* buf, struct story * name)
 	{
 		fprintf(fileout, "%c", buf[i]);
 	}
-	printf("Расшифрованная криптограмма успешно записана в %s!\n", "result.txt");
+	printf("The decrypted cryptogram was successfully written to %s!\n", "result.txt");
 	fclose(fileout);
 }
 
@@ -382,17 +382,17 @@ void sortcountshifr(char* buf, struct story * name, struct alphabet * dict)
 
 int menu()
 {
-	printf("1. Частотный анализ криптограммы.\n");
-	printf("2. Автозамена букв.\n");
-	printf("3. Вывод на экран всех слов, сгрупированных по кол-ву букв.\n");
-	printf("4. Вывод на экран всех слов, сгрупированных по кол-ву нерасшифрованных букв.\n");
-	printf("5. Отображение криптограммы с расшифрованным текстом на данный момент.\n");
-	printf("6. Вернуть последнюю заменённую букву назад.\n");
-	printf("7. История замен букв.\n");
-	printf("8. Дешифрование.\n");
-	printf("9. Запись в файл расшифрованной криптограммы.\n");
-	printf("0. Выход из программы.\n");
-	printf("\nВыберите номер режима работы программы: ");
+	printf("1. Frequency analysis of the cryptogram.\n");
+	printf("2. Autocorrect letters.\n");
+	printf("3. Displaying all words grouped by the number of letters.\n");
+	printf("4. Displaying all words grouped by the number of unencrypted letters.\n");
+	printf("5. Displaying the cryptogram with the decrypted text at the moment.\n");
+	printf("6. Return the last modified letter back.\n");
+	printf("7. History of letter replacements.\n");
+	printf("8. Decryption.\n");
+	printf("9. Writing a decrypted cryptogram to a file.\n");
+	printf("0. Exiting the program.\n");
+	printf("\nSelect the number of the program's operating mode: ");
 
 	int value = -1;
 	char input[3];
@@ -416,15 +416,15 @@ int main()
 	if (file == NULL)
 	{
 		system("cls");
-		printf("Ошибка! Не был найден исходный файл с криптограммой. Ожидался: lab_var_2.txt\n");
-		printf("Проверьте наличие файла и запустите программу ещё раз.\n");
+		printf("Error! The source file with the cryptogram was not found. Expected: lab_var_2.txt\n");
+		printf("Check for the file and run the program again.\n");
 		return -1;
 	}
 
 	struct story mode = { 0, 0, 0, 0, '0' };
 	struct alphabet alpha = { "АБВГДЕЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯ", "абвгдежзийклмнопрстуфхцчшщъыьэюя", "оеаинтсрвлкмдпуяыьгзбчйчжшюцщэфъ" };
 
-	printf("Меню приложения \"Cryptanalysis\"\n\n");
+	printf("Application Menu \"Cryptanalysis\"\n\n");
 
 	char* buf;
 	buf = (char*)malloc(sizeof(char));
